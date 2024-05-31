@@ -33,8 +33,6 @@ Para que: Eu possa gerenciar facilmente o acesso ao sistema<br/>
 
 ### Critérios de Aceitação:
 A lista de usuários deve exibir informações como nome, e-mail, data de nascimento e telefone.<br/>
-Deve ser possível filtrar a lista por nome, e-mail e data de nascimento.<br/>
-Deve ser possível ordenar a lista por qualquer coluna.<br/>
 Cada linha da lista deve ter opções para visualizar, editar e excluir o usuário.<br/>
 
 ## 3. História de Usuário: Atualizar Usuário
@@ -159,8 +157,6 @@ Para que: Eu possa gerenciar facilmente minhas propriedades<br/>
 
 ### Critérios de Aceitação:
 A lista de carros deve exibir informações como marca, modelo, ano e placa.<br/>
-Deve ser possível filtrar a lista por marca, modelo, e ano.<br/>
-Deve ser possível ordenar a lista por qualquer coluna.<br/>
 Cada linha da lista deve ter opções para visualizar, editar e excluir o carro.<br/>
 
 ## 3. História de Usuário: Atualizar Carro
