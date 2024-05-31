@@ -5,7 +5,7 @@ Como administrador do sistema, eu quero poder gerenciar os usuários do sistema 
 Como usuário do sistema, eu quero poder cadastrar um usuário, visualizar meus proprios dados, editar meus proprios dados e deletar minha conta.
 
 ## 1. História de Usuário: Criar Usuário
-Título: Como ususuáriosu, quero criar um novo usuário para que ele possa acessar o sistema.
+Título: Como usuário, quero criar um novo usuário para que ele possa acessar o sistema.
 
 ### Descrição:
 Como: Usuários
