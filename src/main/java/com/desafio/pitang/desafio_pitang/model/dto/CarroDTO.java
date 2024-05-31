@@ -1,6 +1,5 @@
 package com.desafio.pitang.desafio_pitang.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -8,45 +7,23 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UsuarioDTO {
+public class CarroDTO {
 
     private Long id;
-
     @NotBlank(message = "Missing fields")
     @NotNull(message = "Invalid fields")
-    private String firstName;
-
+    private Integer year;
     @NotBlank(message = "Missing fields")
     @NotNull(message = "Invalid fields")
-    private String lastName;
-
+    private String licensePlate;
     @NotBlank(message = "Missing fields")
     @NotNull(message = "Invalid fields")
-    private String email;
-
-
+    private String model;
     @NotBlank(message = "Missing fields")
     @NotNull(message = "Invalid fields")
-    @JsonFormat(pattern="dd/MM/yyyy")
-    private String birthday;
-
-    @NotBlank(message = "Missing fields")
-    @NotNull(message = "Invalid fields")
-    private String login;
-
-    @NotBlank(message = "Missing fields")
-    @NotNull(message = "Invalid fields")
-    private String password;
-
-    @NotBlank(message = "Missing fields")
-    @NotNull(message = "Invalid fields")
-    private String phone;
-
-    private List<CarroDTO> cars;
+    private String color;
 }

@@ -41,6 +41,7 @@ public class UsuarioService {
         Usuario usuario = (Usuario) this.converter.convertObject(usuarioDTO, Usuario.class);
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         usuario.setCreatedAt(new Date());
+        usuario.setCars(List.of());
         usuario.setRole(UserRole.USER);
         usuario = this.usuarioRepository.save(usuario);
         return (UsuarioDTO) this.converter.convertObject(usuario , UsuarioDTO.class);

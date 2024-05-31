@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -28,4 +29,6 @@ public class UsuarioBasicoDTO {
     private String phone;
 
     private Date lastLogin;
+
+    private List<CarroDTO> cars;
 }
