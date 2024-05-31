@@ -30,7 +30,7 @@ public class UsuarioController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<UsuarioBasicoDTO> listarUsuarios(SecurityContextHolderAwareRequestWrapper request) {
+    public List<UsuarioBasicoDTO> listarUsuarios() {
         return usuarioService.listarUsuarios();
     }
 
@@ -40,5 +40,11 @@ public class UsuarioController {
                                     @Valid @RequestBody UsuarioDTO usuarioDTO,
                                     @AuthenticationPrincipal Usuario usuario) {
         return usuarioService.editarUsuarios(usuarioDTO, id, usuario);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removerUsuario(@PathVariable Long id, @AuthenticationPrincipal Usuario usuario) {
+        usuarioService.removerUsuario(id, usuario);
     }
 }

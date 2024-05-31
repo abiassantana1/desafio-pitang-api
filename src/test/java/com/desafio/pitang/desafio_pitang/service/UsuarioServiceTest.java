@@ -196,4 +196,18 @@ public class UsuarioServiceTest {
         assertEquals(expectedMessage, resultMessage);
     }
 
+    @Test
+    public void removerUsuarioSempermisao() {
+
+        when(usuarioRepository.existsById(any())).thenReturn(true);
+
+        Exception exception = assertThrows(InvalidCredentialException.class, () ->
+                usuarioService.removerUsuario(2L, usuario));
+
+        String expectedMessage = "Unauthorized";
+        String resultMessage = exception.getMessage();
+
+        assertEquals(expectedMessage, resultMessage);
+    }
+
 }

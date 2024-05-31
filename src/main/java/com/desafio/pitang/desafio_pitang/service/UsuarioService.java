@@ -4,7 +4,6 @@ package com.desafio.pitang.desafio_pitang.service;
 import com.desafio.pitang.desafio_pitang.exception.BusinessException;
 import com.desafio.pitang.desafio_pitang.exception.InvalidCredentialException;
 import com.desafio.pitang.desafio_pitang.exception.MultipleBusinessException;
-import com.desafio.pitang.desafio_pitang.exception.SourceNotFoundException;
 import com.desafio.pitang.desafio_pitang.mapper.ConverterDTO;
 import com.desafio.pitang.desafio_pitang.model.dto.UsuarioBasicoDTO;
 import com.desafio.pitang.desafio_pitang.model.dto.UsuarioDTO;
@@ -92,6 +91,15 @@ public class UsuarioService {
             usuario.setCreatedAt(usuarioLogado.getCreatedAt());
             usuario.setPassword(usuarioLogado.getPassword());
             return (UsuarioDTO) this.converter.convertObject(this.usuarioRepository.save(usuario) , UsuarioDTO.class);
+        } else {
+            throw new InvalidCredentialException("Unauthorized");
+        }
+    }
+
+    @Transactional(rollbackOn = Throwable.class)
+    public void removerUsuario(Long id, Usuario usuarioLogado) {
+        if(usuarioLogado.getRole() == UserRole.ADMIN || usuarioLogado.getId() == id) {
+            this.usuarioRepository.deleteById(id);
         } else {
             throw new InvalidCredentialException("Unauthorized");
         }
