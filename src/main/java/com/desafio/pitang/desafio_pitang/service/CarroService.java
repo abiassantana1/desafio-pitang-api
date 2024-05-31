@@ -10,6 +10,8 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class CarroService {
@@ -31,5 +33,9 @@ public class CarroService {
         if(this.carroRepository.existsByLicensePlate(carroDTO.getLicensePlate())){
             throw new BusinessException("License plate already exists");
         }
+    }
+
+    public List<CarroDTO> listarCarros(Usuario usuario) {
+        return this.converter.converterListObjects(this.carroRepository.findAllByUsuarioId(usuario.getId()), CarroDTO.class);
     }
 }

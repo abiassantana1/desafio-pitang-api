@@ -16,8 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -91,6 +90,23 @@ public class CarroServiceTest {
         String resultMessage = exception.getMessage();
         assertEquals(expectedMessage, resultMessage);
 
+    }
+
+    @Test
+    public void listarCarroCarrosTest() {
+        // Mocando consulta e converção de objeto
+        when(converter.converterListObjects(any(), any())).thenReturn((carrosDTO));
+        when(carroRepository.findAll()).thenReturn(carros);
+
+        // Executando
+        List<CarroDTO> result = carroService.listarCarros(usuario);
+
+        // Verificando resultado
+        assertAll( "Verifica o resultado listagem",
+                () -> assertEquals(carrosDTO.get(0), result.get(0)),
+                () -> assertEquals(carrosDTO.get(1), result.get(1))
+
+        );
     }
 
 }
