@@ -51,7 +51,19 @@ Ao editar o e-mail, deve ser verificado se ele não está em uso por outro usuá
 Deve ser possível ativar ou desativar o usuário.
 As alterações devem ser salvas e refletidas imediatamente na lista de usuários.
 
-## 4. História de Usuário: Atualizar Proprio Usuário
+## 4. História de Usuário: Autenticar Usuário
+Título: Como usuário, quero poder me autenticar para que possa acessar certas funcionalidades do sistema.
+
+### Descrição:
+Como: Usuários
+Eu quero: Poder me autenticar
+Para que: Possa acessar o sistema certas funcionalidades do sistemas
+
+### Critérios de Aceitação:
+O formulario de login deve contar campo de login e senha, o campo de senha deve permanecer privado (oculto por ***).
+A efetuar o login as funcionalidades que necessitam de autenticação devem ser liberadas para o usuário
+
+## 5. História de Usuário: Atualizar Proprio Usuário
 Título: Como usuario autenticado no sistema, quero editar as minhas proprias informações para manter os dados atualizados.
 
 ### Descrição:
@@ -66,7 +78,7 @@ Ao editar o e-mail, deve ser verificado se ele não está em uso por outro usuá
 Ao editar o login, deve ser verificado se ele não está em uso por outro usuário.
 As alterações devem ser salvas e refletidas imediatamente na lista de usuários.
 
-## 5. História de Usuário: Excluir Usuário
+## 6. História de Usuário: Excluir Usuário
 Título: Como administrador, quero excluir um usuário para remover o acesso de usuários que não precisam mais do sistema.
 
 ### Descrição:
@@ -80,7 +92,7 @@ Ao clicar em excluir, deve aparecer um modal de confirmação perguntando se o a
 Ao confirmar a exclusão, o usuário deve ser removido da lista de usuários.
 Ao ser excluido um usuários, os carros asociados a ele devem ser exluidos do sistema também
 
-## 6. História de Usuário: Excluir o proprio Usuário
+## 7. História de Usuário: Excluir o proprio Usuário
 Título: Como usuário autenticado, quero excluir meu proprio usuário para remover meus dados do sistema.
 
 ### Descrição:
@@ -94,7 +106,7 @@ Ao clicar em excluir, deve aparecer um modal de confirmação perguntando se o a
 Ao confirmar a exclusão, o usuário deve ser removido da lista de usuários.
 Ao ser excluido um usuários, os carros asociados a ele devem ser exluidos do sistema também
 
-## 7. História de Usuário: Visualizar Detalhes do Usuário
+## 8. História de Usuário: Visualizar Detalhes do Usuário
 Título: Como administrador, quero visualizar os detalhes de um usuário específico para obter informações completas sobre o usuário.
 
 ### Descrição:
@@ -108,7 +120,7 @@ A página de detalhes do usuário deve exibir informações como nome, sobrenome
 Deve haver um botão para editar o usuário a partir da página de detalhes.
 Deve ser possível retornar à lista de usuários a partir da página de detalhes.
 
-## 7. História de Usuário: Visualizar Detalhes do proprio Usuário
+## 9. História de Usuário: Visualizar Detalhes do proprio Usuário
 Título: Como usuário, quero visualizar os detalhes do meu proprio usuário para obter informações completas sobre meu cadastro.
 
 ### Descrição:
