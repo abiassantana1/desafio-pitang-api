@@ -8,7 +8,7 @@ Como usuário do sistema, eu quero poder cadastrar um usuário, visualizar meus 
 Título: Como usuário, quero criar um novo usuário para que ele possa acessar o sistema.
 
 ### Descrição:
-Como: Usuários
+Como: Usuários/z
 Eu quero: Criar um novo usuário
 Para que: Ele possa acessar o sistema
 
