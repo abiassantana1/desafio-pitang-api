@@ -52,14 +52,15 @@ Deve ser possível ativar ou desativar o usuário.
 As alterações devem ser salvas e refletidas imediatamente na lista de usuários.
 
 ## 4. História de Usuário: Atualizar Proprio Usuário
-Título: Como usuario, quero editar as minhas proprias informações para manter os dados atualizados.
+Título: Como usuario autenticado no sistema, quero editar as minhas proprias informações para manter os dados atualizados.
 
 ### Descrição:
-Como: Usuários
+Como: Usuário autenticado no sistema
 Eu quero: Editar as informações do meu proprio usuário
 Para que: Eu possa manter os dados atualizados
 
 ### Critérios de Aceitação:
+Deve ser possível editar os dados no proprio usuário logado no sistema.
 Deve ser possível editar o nome(nome e sobrenome), e-mail, login, senha, data de nascimento e telefone.
 Ao editar o e-mail, deve ser verificado se ele não está em uso por outro usuário.
 Ao editar o login, deve ser verificado se ele não está em uso por outro usuário.
@@ -79,7 +80,21 @@ Ao clicar em excluir, deve aparecer um modal de confirmação perguntando se o a
 Ao confirmar a exclusão, o usuário deve ser removido da lista de usuários.
 Ao ser excluido um usuários, os carros asociados a ele devem ser exluidos do sistema também
 
-## 6. História de Usuário: Visualizar Detalhes do Usuário
+## 6. História de Usuário: Excluir o proprio Usuário
+Título: Como usuário autenticado, quero excluir meu proprio usuário para remover meus dados do sistema.
+
+### Descrição:
+Como: Usuário
+Eu quero: Excluir meu proprio um usuário
+Para que: Eu possa remover meus dados do sistema
+
+### Critérios de Aceitação:
+Deve haver uma opção para excluir o usuário na lista de usuários.
+Ao clicar em excluir, deve aparecer um modal de confirmação perguntando se o administrador tem certeza de que deseja excluir o usuário.
+Ao confirmar a exclusão, o usuário deve ser removido da lista de usuários.
+Ao ser excluido um usuários, os carros asociados a ele devem ser exluidos do sistema também
+
+## 7. História de Usuário: Visualizar Detalhes do Usuário
 Título: Como administrador, quero visualizar os detalhes de um usuário específico para obter informações completas sobre o usuário.
 
 ### Descrição:
