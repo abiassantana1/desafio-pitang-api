@@ -194,4 +194,33 @@ public class CarroServiceTest {
         assertEquals(expectedMessage, resultMessage);
     }
 
+    @Test
+    public void buscarCarroTest() {
+        // Mocando consulta e converção de objeto
+        when(this.carroRepository.findByIdAndUsuarioId(anyLong(), anyLong())).thenReturn(Optional.of(carros.get(0)));
+        when(converter.convertObject(any(), any())).thenReturn(carrosDTO.get(0));
+
+        // Executando
+        CarroDTO result = carroService.buscarCarro(1L, usuario);
+
+        // Verificando resultado
+        assertEquals(carrosDTO.get(0), result);
+    }
+
+    @Test
+    public void buscarCarroCarroNaoEncontradoTest() {
+        // Mocando consulta e converção de objeto
+        when(this.carroRepository.findByIdAndUsuarioId(anyLong(), anyLong())).thenReturn(Optional.empty());
+
+        // Executando
+        Exception exception = assertThrows(SourceNotFoundException.class, () -> {
+            carroService.buscarCarro(1L, usuario);
+        });
+
+        // Verificando resultado
+        String expectedMessage = "";
+        String resultMessage = exception.getMessage();
+        assertEquals(expectedMessage, resultMessage);
+    }
+
 }

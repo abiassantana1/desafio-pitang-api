@@ -45,4 +45,11 @@ public class CarroController {
         carroService.removerCarro(id, usuario);
     }
 
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CarroDTO buscarCarro(@PathVariable Long id, @AuthenticationPrincipal Usuario usuario) {
+        return carroService.buscarCarro(id, usuario);
+    }
+
+
 }

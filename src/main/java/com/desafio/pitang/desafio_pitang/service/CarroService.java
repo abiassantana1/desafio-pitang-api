@@ -68,4 +68,11 @@ public class CarroService {
             throw new SourceNotFoundException("");
         }
     }
+
+    public CarroDTO buscarCarro(Long id, Usuario usuario) {
+        Carro carro = this.carroRepository.findByIdAndUsuarioId(id, usuario.getId())
+                .orElseThrow(() -> new SourceNotFoundException(""));
+        return (CarroDTO) this.converter.convertObject(carro, CarroDTO.class);
+    }
+
 }
