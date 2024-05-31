@@ -19,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -197,12 +198,36 @@ public class UsuarioServiceTest {
     }
 
     @Test
-    public void removerUsuarioSempermisao() {
+    public void removerUsuarioSemPermisao() {
 
         when(usuarioRepository.existsById(any())).thenReturn(true);
 
         Exception exception = assertThrows(InvalidCredentialException.class, () ->
                 usuarioService.removerUsuario(2L, usuario));
+
+        String expectedMessage = "Unauthorized";
+        String resultMessage = exception.getMessage();
+
+        assertEquals(expectedMessage, resultMessage);
+    }
+
+    @Test
+    public void buscarUsuario() {
+        when(this.usuarioRepository.findById(any())).thenReturn(Optional.of(usuario));
+        when(this.converter.convertObject(usuario, UsuarioDTO.class)).thenReturn(usuarioDTO);
+
+        UsuarioDTO result = usuarioService.buscarUsuario(1L, usuario);
+
+        assertEquals(usuarioDTO, result);
+    }
+
+    @Test
+    public void buscarUsuarioSemPermisao() {
+        when(this.usuarioRepository.findById(any())).thenReturn(Optional.of(usuario));
+        when(this.converter.convertObject(usuario, UsuarioDTO.class)).thenReturn(usuarioDTO);
+
+        Exception exception = assertThrows(InvalidCredentialException.class, () ->
+                usuarioService.buscarUsuario(2L, usuario));
 
         String expectedMessage = "Unauthorized";
         String resultMessage = exception.getMessage();

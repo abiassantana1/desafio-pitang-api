@@ -4,6 +4,7 @@ package com.desafio.pitang.desafio_pitang.service;
 import com.desafio.pitang.desafio_pitang.exception.BusinessException;
 import com.desafio.pitang.desafio_pitang.exception.InvalidCredentialException;
 import com.desafio.pitang.desafio_pitang.exception.MultipleBusinessException;
+import com.desafio.pitang.desafio_pitang.exception.SourceNotFoundException;
 import com.desafio.pitang.desafio_pitang.mapper.ConverterDTO;
 import com.desafio.pitang.desafio_pitang.model.dto.UsuarioBasicoDTO;
 import com.desafio.pitang.desafio_pitang.model.dto.UsuarioDTO;
@@ -103,6 +104,17 @@ public class UsuarioService {
         } else {
             throw new InvalidCredentialException("Unauthorized");
         }
+    }
+
+    public UsuarioDTO buscarUsuario(Long id, Usuario usuarioLogado) {
+        if(usuarioLogado.getRole() == UserRole.ADMIN || usuarioLogado.getId() == id) {
+            Usuario usuario = this.usuarioRepository.findById(id)
+                    .orElseThrow(() -> new SourceNotFoundException(""));
+            return (UsuarioDTO) this.converter.convertObject(usuario, UsuarioDTO.class);
+        } else {
+            throw new InvalidCredentialException("Unauthorized");
+        }
+
     }
 
 

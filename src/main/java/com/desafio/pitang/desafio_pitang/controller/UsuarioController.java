@@ -47,4 +47,10 @@ public class UsuarioController {
     public void removerUsuario(@PathVariable Long id, @AuthenticationPrincipal Usuario usuario) {
         usuarioService.removerUsuario(id, usuario);
     }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public UsuarioDTO buscarUsuario(@PathVariable Long id, @AuthenticationPrincipal Usuario usuario) {
+        return usuarioService.buscarUsuario(id, usuario);
+    }
 }
