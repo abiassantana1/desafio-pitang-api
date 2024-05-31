@@ -1,11 +1,13 @@
 package com.desafio.pitang.desafio_pitang.service;
 
 import com.desafio.pitang.desafio_pitang.exception.BusinessException;
+import com.desafio.pitang.desafio_pitang.exception.InvalidCredentialException;
 import com.desafio.pitang.desafio_pitang.exception.MultipleBusinessException;
 import com.desafio.pitang.desafio_pitang.mapper.ConverterDTO;
 import com.desafio.pitang.desafio_pitang.model.dto.UsuarioBasicoDTO;
 import com.desafio.pitang.desafio_pitang.model.dto.UsuarioDTO;
 import com.desafio.pitang.desafio_pitang.model.entity.Usuario;
+import com.desafio.pitang.desafio_pitang.model.enums.UserRole;
 import com.desafio.pitang.desafio_pitang.repository.UsuarioRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +54,7 @@ public class UsuarioServiceTest {
         usuario.setId(1L);
         usuario.setEmail("test@gmail.com");
         usuario.setLogin("login");
+        usuario.setRole(UserRole.USER);
 
         usuarioDTO = new UsuarioDTO();
         usuarioDTO.setId(1L);
@@ -136,6 +139,61 @@ public class UsuarioServiceTest {
 
         assertEquals(List.of(usuarioBasicoDTO), result);
 
+    }
+
+    @Test
+    public void editarUsuariosUserTest() {
+
+        when(usuarioRepository.existsByEmail(any())).thenReturn(false);
+        when(usuarioRepository.existsByLogin(any())).thenReturn(false);
+        when(usuarioRepository.save(any())).thenReturn(usuario);
+        when(converter.convertObject(usuarioDTO, Usuario.class)).thenReturn(usuario);
+        when(converter.convertObject(usuario, UsuarioDTO.class)).thenReturn(usuarioDTO);
+        when(passwordEncoder.encode(any())).thenReturn("");
+
+
+        UsuarioDTO result = usuarioService.editarUsuarios(usuarioDTO, 1L, usuario);
+
+        assertEquals(usuarioDTO, result);
+    }
+
+    @Test
+    public void editarUsuariosAdminTest() {
+        usuario.setRole(UserRole.ADMIN);
+
+
+        when(usuarioRepository.existsByEmail(any())).thenReturn(false);
+        when(usuarioRepository.existsByLogin(any())).thenReturn(false);
+        when(usuarioRepository.save(any())).thenReturn(usuario);
+        when(converter.convertObject(usuarioDTO, Usuario.class)).thenReturn(usuario);
+        when(converter.convertObject(usuario, UsuarioDTO.class)).thenReturn(usuarioDTO);
+        when(passwordEncoder.encode(any())).thenReturn("");
+
+
+        UsuarioDTO result = usuarioService.editarUsuarios(usuarioDTO, 1L, usuario);
+
+        assertEquals(usuarioDTO, result);
+    }
+
+    @Test
+    public void editarUsuariosInvalidCredencial() {
+        usuario.setRole(UserRole.USER);
+
+        when(usuarioRepository.existsByEmail(any())).thenReturn(false);
+        when(usuarioRepository.existsByLogin(any())).thenReturn(false);
+        when(usuarioRepository.save(any())).thenReturn(usuario);
+        when(converter.convertObject(usuarioDTO, Usuario.class)).thenReturn(usuario);
+        when(converter.convertObject(usuario, UsuarioDTO.class)).thenReturn(usuarioDTO);
+        when(passwordEncoder.encode(any())).thenReturn("");
+
+
+        Exception exception = assertThrows(InvalidCredentialException.class, () ->
+                usuarioService.editarUsuarios(usuarioDTO, 2L, usuario));
+
+        String expectedMessage = "Unauthorized";
+        String resultMessage = exception.getMessage();
+
+        assertEquals(expectedMessage, resultMessage);
     }
 
 }
