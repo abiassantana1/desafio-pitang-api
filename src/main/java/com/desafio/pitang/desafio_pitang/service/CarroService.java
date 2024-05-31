@@ -1,15 +1,19 @@
 package com.desafio.pitang.desafio_pitang.service;
 
 import com.desafio.pitang.desafio_pitang.exception.BusinessException;
+import com.desafio.pitang.desafio_pitang.exception.SourceNotFoundException;
 import com.desafio.pitang.desafio_pitang.mapper.ConverterDTO;
 import com.desafio.pitang.desafio_pitang.model.dto.CarroDTO;
+import com.desafio.pitang.desafio_pitang.model.dto.UsuarioDTO;
 import com.desafio.pitang.desafio_pitang.model.entity.Carro;
 import com.desafio.pitang.desafio_pitang.model.entity.Usuario;
 import com.desafio.pitang.desafio_pitang.repository.CarroRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,5 +41,22 @@ public class CarroService {
 
     public List<CarroDTO> listarCarros(Usuario usuario) {
         return this.converter.converterListObjects(this.carroRepository.findAllByUsuarioId(usuario.getId()), CarroDTO.class);
+    }
+
+    @Transactional
+    public CarroDTO editarCarros(CarroDTO carroDTO, Long id, Usuario usuario) {
+        if(carroRepository.existsByIdAndUsuarioId(id, usuario.getId())) {
+            Carro carroAntigo = carroRepository.findByIdAndUsuarioId(id, usuario.getId())
+                    .orElseThrow(() -> new SourceNotFoundException(""));
+            if(!carroAntigo.getLicensePlate().equals(carroDTO.getLicensePlate())) {
+                this.validarCarro(carroDTO);
+            }
+            Carro carro = (Carro) this.converter.convertObject(carroDTO, Carro.class);
+            carro.setId(id);
+            carro.setUsuario(usuario);
+            return (CarroDTO) this.converter.convertObject(this.carroRepository.save(carro) , CarroDTO.class);
+        } else {
+            throw new SourceNotFoundException("");
+        }
     }
 }

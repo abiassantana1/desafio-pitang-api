@@ -1,6 +1,7 @@
 package com.desafio.pitang.desafio_pitang.service;
 
 import com.desafio.pitang.desafio_pitang.exception.BusinessException;
+import com.desafio.pitang.desafio_pitang.exception.SourceNotFoundException;
 import com.desafio.pitang.desafio_pitang.mapper.ConverterDTO;
 import com.desafio.pitang.desafio_pitang.model.dto.CarroDTO;
 import com.desafio.pitang.desafio_pitang.model.entity.Carro;
@@ -15,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -107,6 +109,65 @@ public class CarroServiceTest {
                 () -> assertEquals(carrosDTO.get(1), result.get(1))
 
         );
+    }
+
+    @Test
+    public void editarCarrosTest() {
+        // Mocando consulta e converção de objeto
+        when(this.carroRepository.existsByIdAndUsuarioId(any(), any())).thenReturn(true);
+        when(this.carroRepository.findByIdAndUsuarioId(any(),any())).thenReturn(Optional.of(carros.get(0)));
+        when(this.carroRepository.save(any())).thenReturn(carros.get(0));
+        when(converter.convertObject(carrosDTO.get(0), Carro.class)).thenReturn(carros.get(0));
+        when(converter.convertObject(carros.get(0), CarroDTO.class)).thenReturn(carrosDTO.get(0));
+        when(this.carroRepository.existsByLicensePlate(anyString())).thenReturn(false);
+
+        // Executando
+        CarroDTO result = carroService.editarCarros(carrosDTO.get(0), 1L, usuario);
+
+        // Verificando resultado
+        assertEquals(carrosDTO.get(0), result);
+    }
+
+    @Test
+    public void editarCarrosIdNaoEncontradoTest() {
+        // Mocando consulta e converção de objeto
+        when(this.carroRepository.existsByIdAndUsuarioId(any(),any())).thenReturn(false);
+        when(this.carroRepository.findByIdAndUsuarioId(any(),any())).thenReturn(Optional.of(carros.get(0)));
+
+        when(this.carroRepository.save(any())).thenReturn(carros.get(0));
+        when(converter.convertObject(carrosDTO.get(0), Carro.class)).thenReturn(carros.get(0));
+        when(converter.convertObject(carros.get(0), CarroDTO.class)).thenReturn(carrosDTO.get(0));
+        when(this.carroRepository.existsByLicensePlate(anyString())).thenReturn(false);
+
+        // Executando
+        Exception exception = assertThrows(SourceNotFoundException.class, () ->
+                carroService.editarCarros(carrosDTO.get(0), 1L, usuario));
+
+        // Verificando resultado
+        String expectedMessage = "";
+        String resultMessage = exception.getMessage();
+        assertEquals(expectedMessage, resultMessage);
+    }
+
+    @Test
+    public void editarCarrosIdPlacaJaExisteTest() {
+        carros.get(0).setLicensePlate("aaaaa");
+
+        // Mocando consulta e converção de objeto
+        when(this.carroRepository.existsByIdAndUsuarioId(any(),any())).thenReturn(true);
+        when(this.carroRepository.findByIdAndUsuarioId(any(),any())).thenReturn(Optional.of(carros.get(0)));
+        when(this.carroRepository.existsByLicensePlate(any())).thenReturn(true);
+        when(this.converter.convertObject(carrosDTO.get(0), Carro.class)).thenReturn(carros.get(0));
+
+
+        // Executando
+        Exception exception = assertThrows(BusinessException.class, () ->
+                carroService.editarCarros(carrosDTO.get(0), 1L, usuario));
+
+        // Verificando resultado
+        String expectedMessage = "License plate already exists";
+        String resultMessage = exception.getMessage();
+        assertEquals(expectedMessage, resultMessage);
     }
 
 }
