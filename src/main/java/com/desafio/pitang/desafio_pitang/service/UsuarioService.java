@@ -59,5 +59,10 @@ public class UsuarioService {
         }
     }
 
+    public void atualizarUltimoLogin(Usuario usuario) {
+        usuario.setLastLogin(new Date());
+        this.usuarioRepository.save(usuario);
+    }
+
 
 }

@@ -3,6 +3,7 @@ package com.desafio.pitang.desafio_pitang.service;
 import com.desafio.pitang.desafio_pitang.exception.BusinessException;
 import com.desafio.pitang.desafio_pitang.exception.MultipleBusinessException;
 import com.desafio.pitang.desafio_pitang.mapper.ConverterDTO;
+import com.desafio.pitang.desafio_pitang.model.dto.UsuarioBasicoDTO;
 import com.desafio.pitang.desafio_pitang.model.dto.UsuarioDTO;
 import com.desafio.pitang.desafio_pitang.model.entity.Usuario;
 import com.desafio.pitang.desafio_pitang.repository.UsuarioRepository;
@@ -40,6 +41,8 @@ public class UsuarioServiceTest {
 
     UsuarioDTO usuarioDTO;
 
+    UsuarioBasicoDTO usuarioBasicoDTO;
+
     @Before
     public void setup() {
 
@@ -49,10 +52,16 @@ public class UsuarioServiceTest {
         usuario.setId(1L);
         usuario.setEmail("test@gmail.com");
         usuario.setLogin("login");
+
         usuarioDTO = new UsuarioDTO();
         usuarioDTO.setId(1L);
         usuarioDTO.setEmail("test@gmail.com");
         usuarioDTO.setLogin("login");
+
+        usuarioBasicoDTO = new UsuarioBasicoDTO();
+        usuarioBasicoDTO.setId(1L);
+        usuarioBasicoDTO.setEmail("test@gmail.com");
+        usuarioBasicoDTO.setLogin("login");
     }
 
     @Test
@@ -116,6 +125,17 @@ public class UsuarioServiceTest {
                 () -> assertEquals(expectedMessage2, result.get(1).getMessage())
 
         );
+    }
+
+    @Test
+    public void listarUsuariosTest() {
+        when(converter.converterListObjects(List.of(usuario), UsuarioBasicoDTO.class)).thenReturn(List.of(usuarioBasicoDTO));
+        when(usuarioRepository.findAll()).thenReturn(List.of(usuario));
+
+        List<UsuarioBasicoDTO> result = usuarioService.listarUsuarios();
+
+        assertEquals(List.of(usuarioBasicoDTO), result);
+
     }
 
 }

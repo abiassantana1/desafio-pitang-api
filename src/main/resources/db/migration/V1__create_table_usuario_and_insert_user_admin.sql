@@ -21,4 +21,5 @@ CREATE SEQUENCE tb_usuario_id_seq;
 
 INSERT INTO public.tb_usuario(
 	id, birthday, created_at, email, first_name, last_login, last_name, login, password, phone, role)
-	VALUES (nextval('tb_usuario_id_seq'), '1990-05-01 00:00:00', '1990-05-01 00:00:00', '', '', '1990-05-01 00:00:00', '', '', '', '', 0);
+	VALUES (nextval('tb_usuario_id_seq'), '1990-05-01 00:00:00', '1990-05-01 00:00:00', '', '', '1990-05-01 00:00:00',
+	 '', 'admin', '$2a$10$7F7xGm8iuzafFA7RPS8gzeKJm9qNBwtejT4hSuBKXMNlc/4NxOy1G', '', 0);

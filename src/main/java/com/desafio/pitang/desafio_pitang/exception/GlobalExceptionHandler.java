@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.CredentialsExpiredException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -64,9 +65,15 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorMessage, HttpStatus.FORBIDDEN);
     }
 
+    @ExceptionHandler(InternalAuthenticationServiceException.class)
+    public ResponseEntity<Object> handleInternalAuthenticationServiceException() {
+        ErrorMessageDTO errorMessage = new ErrorMessageDTO("Invalid login or password", HttpStatus.FORBIDDEN.value());
+        return new ResponseEntity<>(errorMessage, HttpStatus.FORBIDDEN);
+    }
+
 
     @ExceptionHandler(MappingException.class)
-    public ResponseEntity<Object> handleMappingException(MappingException ex) {
+    public ResponseEntity<Object> handleMappingException() {
         ErrorMessageDTO errorMessage = new ErrorMessageDTO("Invalid fields", HttpStatus.BAD_REQUEST.value());
         return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
