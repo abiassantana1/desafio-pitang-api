@@ -59,4 +59,13 @@ public class CarroService {
             throw new SourceNotFoundException("");
         }
     }
+
+    @Transactional
+    public void removerCarro(Long id, Usuario usuario) {
+        if(carroRepository.existsByIdAndUsuarioId(id, usuario.getId())) {
+            this.carroRepository.deleteById(id);
+        } else {
+            throw new SourceNotFoundException("");
+        }
+    }
 }

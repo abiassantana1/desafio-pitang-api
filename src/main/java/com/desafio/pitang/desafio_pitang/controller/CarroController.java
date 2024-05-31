@@ -39,4 +39,10 @@ public class CarroController {
         return carroService.editarCarros(carroDTO, id, usuario);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removerCarro(@PathVariable Long id, @AuthenticationPrincipal Usuario usuario) {
+        carroService.removerCarro(id, usuario);
+    }
+
 }

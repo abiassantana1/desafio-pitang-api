@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -166,6 +166,30 @@ public class CarroServiceTest {
 
         // Verificando resultado
         String expectedMessage = "License plate already exists";
+        String resultMessage = exception.getMessage();
+        assertEquals(expectedMessage, resultMessage);
+    }
+
+    @Test
+    public void removerCarroTest() {
+        // Mocando consulta e converção de objeto
+        when(this.carroRepository.existsByIdAndUsuarioId(anyLong(), anyLong())).thenReturn(true);
+
+        // Executando
+        carroService.removerCarro(1L, usuario);
+    }
+
+    @Test
+    public void removerCarroCarroNaoEncontradoTest() {
+        // Mocando consulta e converção de objeto
+        when(this.carroRepository.existsById(any())).thenReturn(false);
+
+        // Executando
+        Exception exception = assertThrows(SourceNotFoundException.class, () ->
+                carroService.removerCarro(1L, usuario));
+
+        // Verificando resultado
+        String expectedMessage = "";
         String resultMessage = exception.getMessage();
         assertEquals(expectedMessage, resultMessage);
     }
