@@ -33,7 +33,7 @@ public class Usuario implements UserDetails {
     private String phone;
     private UserRole role;
     private Date lastLogin;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario")
     private List<Carro> cars;
     @Column(name = "createdAt", nullable = false)

@@ -11,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -75,6 +76,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MappingException.class)
     public ResponseEntity<Object> handleMappingException() {
         ErrorMessageDTO errorMessage = new ErrorMessageDTO("Invalid fields", HttpStatus.BAD_REQUEST.value());
+        return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(TokenExpiredException.class)
+    public ResponseEntity<Object> handleTokenExpiredException() {
+        ErrorMessageDTO errorMessage = new ErrorMessageDTO("Unauthorized - invalid session", HttpStatus.FORBIDDEN.value());
         return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
 }

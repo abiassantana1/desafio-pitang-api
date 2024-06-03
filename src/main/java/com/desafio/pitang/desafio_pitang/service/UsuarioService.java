@@ -32,7 +32,7 @@ public class UsuarioService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     public List<UsuarioBasicoDTO> listarUsuarios() {
-        return this.converter.converterListObjects(this.usuarioRepository.findAll(), UsuarioBasicoDTO.class);
+        return this.converter.converterListObjects(this.usuarioRepository.findAllByRole(UserRole.USER), UsuarioBasicoDTO.class);
     }
 
     @Transactional(rollbackOn = Throwable.class)
@@ -89,7 +89,8 @@ public class UsuarioService {
             this.validarUsuario(usuarioDTO, usuarioLogado);
             Usuario usuario = (Usuario) this.converter.convertObject(usuarioDTO, Usuario.class);
             usuario.setId(id);
-            usuario.setRole(usuarioLogado.getRole());
+            usuario.setRole(UserRole.USER);
+            usuario.setCars(usuarioLogado.getCars());
             usuario.setCreatedAt(usuarioLogado.getCreatedAt());
             usuario.setPassword(usuarioLogado.getPassword());
             return (UsuarioDTO) this.converter.convertObject(this.usuarioRepository.save(usuario) , UsuarioDTO.class);

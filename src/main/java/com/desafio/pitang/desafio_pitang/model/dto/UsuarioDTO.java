@@ -1,5 +1,6 @@
 package com.desafio.pitang.desafio_pitang.model.dto;
 
+import com.desafio.pitang.desafio_pitang.model.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -49,4 +50,6 @@ public class UsuarioDTO {
     private String phone;
 
     private List<CarroDTO> cars;
+
+    private UserRole role;
 }
