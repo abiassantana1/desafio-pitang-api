@@ -210,16 +210,22 @@ Camada de Lógica de Negócio (Backend)<br/>
 Camada de Persistência (Banco de Dados)<br/>
 ### 1. Camada de Apresentação (Frontend)<br/>
 Tecnologias Utilizadas: Angular, Angular Material
-Justificativa: Angular é uma das principais plataformas de desenvolvimento de aplicações de página única (SPA), oferecendo ferramentas poderosas para construção de interfaces dinâmicas e responsivas. O Angular Material fornece componentes de interface de usuário modernos e padronizados, que garantem uma experiência de usuário (UX) consistente e intuitiva.
-Defesa Técnica: A utilização de Angular permite a criação de componentes reutilizáveis e modulares, facilitando a manutenção e escalabilidade do sistema. O Angular Material agiliza o desenvolvimento ao fornecer componentes prontos para uso, garantindo ao mesmo tempo conformidade com as práticas recomendadas de design.
+#### Justificativa: 
+Angular é uma das principais plataformas de desenvolvimento de aplicações de página única (SPA), oferecendo ferramentas poderosas para construção de interfaces dinâmicas e responsivas. O Angular Material fornece componentes de interface de usuário modernos e padronizados, que garantem uma experiência de usuário (UX) consistente e intuitiva.
+#### Defesa Técnica: 
+A utilização de Angular permite a criação de componentes reutilizáveis e modulares, facilitando a manutenção e escalabilidade do sistema. O Angular Material agiliza o desenvolvimento ao fornecer componentes prontos para uso, garantindo ao mesmo tempo conformidade com as práticas recomendadas de design.
 ### 2. Camada de Lógica de Negócio (Backend)
 Tecnologias Utilizadas: Spring Boot, Spring Data JPA, Spring Security
-Justificativa: Spring Boot é uma plataforma robusta para desenvolvimento de aplicações Java, oferecendo configuração mínima e uma ampla gama de funcionalidades prontas para uso. Spring Data JPA facilita a interação com o banco de dados através de uma abstração poderosa sobre o ORM Hibernate. Spring Security é a escolha natural para implementar autenticação e autorização, devido à sua flexibilidade e integração perfeita com outras partes do ecossistema Spring.
-Defesa Técnica: O uso de Spring Boot permite uma rápida inicialização e desenvolvimento de APIs RESTful, com configurações que favorecem a produtividade do desenvolvedor. Spring Data JPA simplifica o acesso ao banco de dados, enquanto Spring Security assegura que apenas usuários autenticados e autorizados possam acessar determinadas funcionalidades, protegendo os dados do sistema contra acessos não autorizados.
+#### Justificativa: 
+Spring Boot é uma plataforma robusta para desenvolvimento de aplicações Java, oferecendo configuração mínima e uma ampla gama de funcionalidades prontas para uso. Spring Data JPA facilita a interação com o banco de dados através de uma abstração poderosa sobre o ORM Hibernate. Spring Security é a escolha natural para implementar autenticação e autorização, devido à sua flexibilidade e integração perfeita com outras partes do ecossistema Spring.
+#### Defesa Técnica: 
+O uso de Spring Boot permite uma rápida inicialização e desenvolvimento de APIs RESTful, com configurações que favorecem a produtividade do desenvolvedor. Spring Data JPA simplifica o acesso ao banco de dados, enquanto Spring Security assegura que apenas usuários autenticados e autorizados possam acessar determinadas funcionalidades, protegendo os dados do sistema contra acessos não autorizados.
 ### 3. Camada de Persistência (Banco de Dados)
 Tecnologias Utilizadas: H2 Database 
-Justificativa: O H2 é um banco de dados em memória leve e rápido, ideal para desenvolvimento e testes. Ele permite criar uma base de dados temporária que é destruída quando a aplicação é encerrada, facilitando o desenvolvimento ágil.
-Defesa Técnica: Utilizar H2 em ambiente de desenvolvimento permite uma iteração rápida e testes isolados, sem a necessidade de configuração complexa de um banco de dados externo. Para ambientes de produção, a transição para um banco de dados relacional mais robusto como PostgreSQL ou MySQL pode ser feita facilmente, aproveitando a abstração proporcionada pelo Spring Data JPA.
+#### Justificativa: 
+O H2 é um banco de dados em memória leve e rápido, ideal para desenvolvimento e testes. Ele permite criar uma base de dados temporária que é destruída quando a aplicação é encerrada, facilitando o desenvolvimento ágil.
+#### Defesa Técnica: 
+Utilizar H2 em ambiente de desenvolvimento permite uma iteração rápida e testes isolados, sem a necessidade de configuração complexa de um banco de dados externo. Para ambientes de produção, a transição para um banco de dados relacional mais robusto como PostgreSQL ou MySQL pode ser feita facilmente, aproveitando a abstração proporcionada pelo Spring Data JPA.
 
 ## Implementação dos CRUDs
 
