@@ -265,3 +265,11 @@ A aplicação utiliza JWT (JSON Web Tokens) para autenticação, garantindo que 
 Spring Security é configurado para proteger as rotas e definir permissões de acesso com base nas roles dos usuários.
 ##### Proteção Contra Ataques Comuns:<br/>
 SQL Injection: Todas as interações com o banco de dados são feitas através de Prepared Statements providos pelo Spring Data JPA.
+
+
+# instalação
+entre na pasta do projeto e efetue os seguintes comandos:<br/>
+### mvn install<br/>
+Ao finalizar o comendo efetue o seguinte comando:<br/>
+### mvn spring-boot:run<br/>
+
