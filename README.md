@@ -1,4 +1,4 @@
-# Título: Gestão de Usuários no Sistema de Administração
+# Gestão de Usuários no Sistema de Administração
 
 ### Descrição:
 Como administrador do sistema, eu quero poder gerenciar os usuários do sistema através de uma interface simples e intuitiva, para que eu possa adicionar, visualizar, editar e deletar usuários conforme necessário.
@@ -132,7 +132,7 @@ A página de detalhes do usuário deve exibir informações como nome, sobrenome
 Deve haver um botão para editar o usuário a partir da página de detalhes.<br/>
 Deve ser possível retornar à lista de usuários a partir da página de detalhes.<br/>
 
-# Titulo: Carros
+# Carros
 
 ## 1. História de Usuário: Criar Carro
 Título: Como usuário, quero adicionar um novo carro para que ele seja listado no meu perfil.
@@ -197,3 +197,65 @@ Para que: Eu possa obter informações completas sobre o carro<br/>
 Deve haver uma opção para visualizar os detalhes do carro na lista de carros.<br/>
 A página de detalhes do carro deve exibir informações como marca, modelo, ano e placa.<br/>
 Deve ser possível retornar à lista de carros a partir da página de detalhes.<br/>
+
+
+# SOLUÇÃO
+## Introdução
+A solução proposta abrange a implementação de um sistema com funcionalidades de CRUD (Create, Read, Update, Delete) para gerenciamento de usuários e carros. Esta seção justifica a escolha das tecnologias e detalha a defesa técnica para cada componente da solução, destacando como a arquitetura e as práticas adotadas.
+
+## Arquitetura da Solução
+A arquitetura do sistema é baseada em uma abordagem de três camadas, cada uma desempenhando um papel crucial na construção de uma aplicação eficiente e de fácil manutenção:<br/>
+Camada de Apresentação (Frontend)<br/>
+Camada de Lógica de Negócio (Backend)<br/>
+Camada de Persistência (Banco de Dados)<br/>
+### 1. Camada de Apresentação (Frontend)<br/>
+Tecnologias Utilizadas: Angular, Angular Material
+Justificativa: Angular é uma das principais plataformas de desenvolvimento de aplicações de página única (SPA), oferecendo ferramentas poderosas para construção de interfaces dinâmicas e responsivas. O Angular Material fornece componentes de interface de usuário modernos e padronizados, que garantem uma experiência de usuário (UX) consistente e intuitiva.
+Defesa Técnica: A utilização de Angular permite a criação de componentes reutilizáveis e modulares, facilitando a manutenção e escalabilidade do sistema. O Angular Material agiliza o desenvolvimento ao fornecer componentes prontos para uso, garantindo ao mesmo tempo conformidade com as práticas recomendadas de design.
+### 2. Camada de Lógica de Negócio (Backend)
+Tecnologias Utilizadas: Spring Boot, Spring Data JPA, Spring Security
+Justificativa: Spring Boot é uma plataforma robusta para desenvolvimento de aplicações Java, oferecendo configuração mínima e uma ampla gama de funcionalidades prontas para uso. Spring Data JPA facilita a interação com o banco de dados através de uma abstração poderosa sobre o ORM Hibernate. Spring Security é a escolha natural para implementar autenticação e autorização, devido à sua flexibilidade e integração perfeita com outras partes do ecossistema Spring.
+Defesa Técnica: O uso de Spring Boot permite uma rápida inicialização e desenvolvimento de APIs RESTful, com configurações que favorecem a produtividade do desenvolvedor. Spring Data JPA simplifica o acesso ao banco de dados, enquanto Spring Security assegura que apenas usuários autenticados e autorizados possam acessar determinadas funcionalidades, protegendo os dados do sistema contra acessos não autorizados.
+### 3. Camada de Persistência (Banco de Dados)
+Tecnologias Utilizadas: H2 Database 
+Justificativa: O H2 é um banco de dados em memória leve e rápido, ideal para desenvolvimento e testes. Ele permite criar uma base de dados temporária que é destruída quando a aplicação é encerrada, facilitando o desenvolvimento ágil.
+Defesa Técnica: Utilizar H2 em ambiente de desenvolvimento permite uma iteração rápida e testes isolados, sem a necessidade de configuração complexa de um banco de dados externo. Para ambientes de produção, a transição para um banco de dados relacional mais robusto como PostgreSQL ou MySQL pode ser feita facilmente, aproveitando a abstração proporcionada pelo Spring Data JPA.
+
+## Implementação dos CRUDs
+
+### CRUD de Usuários
+#### Create (Criação):
+Permite a criação de novos usuários através de um formulário no frontend.
+O backend valida os dados recebidos e os armazena no banco de dados.
+#### Read (Leitura):
+Permite a leitura de dados dos usuários cadastrados.
+Usuários podem visualizar seus próprios dados, enquanto administradores podem visualizar todos os usuários.
+#### Update (Atualização):
+Permite a atualização dos dados dos usuários existentes.
+Usuários podem atualizar seus próprios dados, e administradores podem atualizar dados de qualquer usuário.
+#### Delete (Exclusão):
+Permite a exclusão de usuários.
+Usuários podem deletar suas próprias contas, enquanto administradores podem deletar qualquer usuário.
+
+### CRUD de Carros
+#### Create (Criação):
+Permite a criação de novos registros de carros.<br/>
+Usuários autenticados podem cadastrar seus próprios carros, enquanto administradores podem cadastrar carros para qualquer usuário.
+
+
+#### Read (Leitura):
+Permite a leitura dos dados dos carros cadastrados.<br/>
+Usuários podem visualizar seus próprios carros, enquanto administradores podem visualizar todos os carros cadastrados.
+
+#### Update (Atualização):
+Permite a atualização dos dados dos carros.<br/>
+Usuários podem atualizar seus próprios carros, e administradores podem atualizar dados de qualquer carro.
+#### Delete (Exclusão):
+Permite a exclusão de carros.<br/>
+Usuários podem deletar seus próprios carros, enquanto administradores podem deletar qualquer carro.
+#### Segurança
+##### Autenticação e Autorização:<br/>
+A aplicação utiliza JWT (JSON Web Tokens) para autenticação, garantindo que apenas usuários autenticados possam acessar os endpoints protegidos.
+Spring Security é configurado para proteger as rotas e definir permissões de acesso com base nas roles dos usuários.
+##### Proteção Contra Ataques Comuns:<br/>
+SQL Injection: Todas as interações com o banco de dados são feitas através de Prepared Statements providos pelo Spring Data JPA.
