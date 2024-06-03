@@ -15,7 +15,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
@@ -42,6 +48,15 @@ public class AuthenticationController {
             var token = tokenService.generateToken((Usuario) auth.getPrincipal());
             return ResponseEntity.ok(new UsuarioLoginDTO(token,
                     (UsuarioDTO) converter.convertObject((Usuario) auth.getPrincipal(), UsuarioDTO.class)));
+        }
+        throw new InvalidCredentialException("Unauthorized");
+    }
+
+    @GetMapping("/me")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity me(@AuthenticationPrincipal Usuario usuario) {
+        if (usuario != null) {
+            return ResponseEntity.ok(converter.convertObject(usuario, UsuarioDTO.class));
         }
         throw new InvalidCredentialException("Unauthorized");
     }
